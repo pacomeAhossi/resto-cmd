@@ -1,12 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { PouletCroquant, SuperCremeux } from "../common/models";
 
 let state = {
     value: null,
     owner: {},
     list: [
-        SuperCremeux,
-        PouletCroquant
     ]
 };
 
@@ -46,7 +43,7 @@ export const store = configureStore({
 // store.subscribe(() => {
 //     const state = store.getState();
 //     if(state.owner){
-//         document.querySelector(".header").textContent = `Le propriétaire du restaurent est ${state.owner.firstName}`;
+//         document.querySelector(".header").textContent = `Le propriétaire du restaurant est ${state.owner.firstName}`;
 //     }
 //     if(state.list){
 //         document.getElementById("command").innerHTML = `<h2>Vous avez selectionnés les produits suivants :</h2>`;
