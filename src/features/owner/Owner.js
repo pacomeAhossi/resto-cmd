@@ -34,7 +34,6 @@ export const Owner = () => {
                     <input type="text" name="firstName" />
                 </label>
                 <button type="submit">Configurer le propriétaire</button>
-                <label>AZERTY oui </label>
             </form>
     )
 }

@@ -1,16 +1,11 @@
-import { useEffect, useState } from "react";
-import { useStore } from "react-redux";
+
+import { useSelector } from "react-redux";
+import { getProductList, getTotalOrder } from "../../app/selectors";
 
 export const Total = () => {
-    const store = useStore();
-    const [list, setList] = useState(store.getState().list);
-    const totalCommand = list.reduce((preventValue, currentValue) => 
-        currentValue.price + preventValue
-    , 0);
+    const list = useSelector(getProductList)
+    const totalCommand = useSelector(getTotalOrder);
 
-    useEffect(() => {
-        store.subscribe(() => setList(store.getState().list))
-    });
     return (
         <div className="TotalCommand">
             {

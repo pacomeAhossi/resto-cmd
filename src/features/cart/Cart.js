@@ -1,24 +1,14 @@
-import { useStore } from "react-redux";
+import { useSelector, useStore } from "react-redux";
 import { SuperCremeux } from "../../common/models";
-import { useEffect, useState } from "react";
+import { getProductList } from "../../app/selectors";
 
 export const Cart = () => {
     const store = useStore();
-    const [list, setList] = useState(store.getState().list);
+    const list = useSelector(getProductList);
 
-    useEffect(() => {
-        store.subscribe(() => setList(store.getState().list));
-    });
-    
     return (
         <div className="Selection">
-            <h1>Vos produits sélectionnés</h1>
-            {
-                list.map(
-                    (item, index) => <span key={index} className="SelectedProduct">{item.title} {item.price} £</span>
-                )
-            }
-            
+            <h1>Choisir son menu</h1>
             <div className="CartNavBar">
                 <button onClick={() =>
                         store.dispatch({ type: "ADD_PRODUCT", payload: SuperCremeux })
@@ -27,6 +17,12 @@ export const Cart = () => {
                     Ajoutez un super crémeux
                 </button>
             </div>
+            {
+                list?.map(
+                    (item, index) => <span key={index} className="SelectedProduct">{item.title} {item.price} £</span>
+                )
+            }
+            
         </div>
     )
 } 
