@@ -3,7 +3,7 @@ import { getListQuantityProductPerName } from "../../app/selectors";
 import * as ProductList from '../../common/models'
 
 
-const TIME_TO_RESET_ORDER = 12000
+const TIME_TO_RESET_ORDER = 10000
 
 let timeOutInstance = null
 
@@ -13,7 +13,7 @@ export const resetOrderThunk = createAsyncThunk('cart/resetOrderThunk', async ()
     return new Promise((resolve, reject) => {
         timeOutInstance = setTimeout(() => {
             reject()
-        }, TIME_TO_RESET_ORDER);
+        }, TIME_TO_RESET_ORDER)
     })
 })
 
@@ -67,7 +67,10 @@ export const cartSlice = createSlice({
             const specialOffer = ProductList.PouletCroquant;
             return [...state, {...specialOffer, price: Math.round((ProductList.PouletCroquant.price / 2) * 100) / 100}]
         })
-        builder.addCase(addProductThunk.rejected, () => {
+        builder.addCase(addProductThunk.rejected, (state) => {
+            return [...state]
+        })
+        builder.addCase(resetOrderThunk.rejected, () => {
             return []
         })
     }
